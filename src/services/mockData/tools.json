@@ -1,0 +1,200 @@
+[
+  {
+    "Id": 1,
+    "name": "ChatGPT",
+    "description": "Advanced conversational AI for writing, coding, analysis, and creative tasks with natural language understanding.",
+    "category": "Writing",
+    "tags": ["conversation", "writing", "coding", "analysis"],
+    "pricing": "Freemium",
+    "features": ["Natural language conversations", "Code generation", "Text analysis", "Creative writing", "Multi-language support"],
+    "website": "https://chat.openai.com",
+    "logo": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 2,
+    "name": "Midjourney",
+    "description": "AI-powered image generator that creates stunning artwork from text descriptions with exceptional quality.",
+    "category": "Image",
+    "tags": ["art", "design", "creative", "illustration"],
+    "pricing": "Paid",
+    "features": ["Text-to-image generation", "High-quality artwork", "Style variations", "Upscaling", "Community gallery"],
+    "website": "https://midjourney.com",
+    "logo": "https://images.unsplash.com/photo-1633356122544-f134324a6cee?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 3,
+    "name": "GitHub Copilot",
+    "description": "AI pair programmer that helps write code faster with intelligent suggestions and completions.",
+    "category": "Code",
+    "tags": ["programming", "development", "autocomplete", "coding-assistant"],
+    "pricing": "Paid",
+    "features": ["Code suggestions", "Multiple language support", "Context-aware completions", "IDE integration", "Code explanation"],
+    "website": "https://github.com/features/copilot",
+    "logo": "https://images.unsplash.com/photo-1618477388954-7852f32655ec?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 4,
+    "name": "Runway ML",
+    "description": "Creative AI toolkit for video editing, generation, and manipulation with powerful machine learning models.",
+    "category": "Video",
+    "tags": ["video-editing", "creative", "generation", "effects"],
+    "pricing": "Freemium",
+    "features": ["Video generation", "Background removal", "Style transfer", "Object removal", "AI effects"],
+    "website": "https://runwayml.com",
+    "logo": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 5,
+    "name": "Murf AI",
+    "description": "Text-to-speech AI that creates realistic voiceovers with human-like voices in multiple languages.",
+    "category": "Audio",
+    "tags": ["text-to-speech", "voiceover", "narration", "podcast"],
+    "pricing": "Freemium",
+    "features": ["Natural voice synthesis", "Multiple languages", "Voice customization", "Pronunciation control", "Audio export"],
+    "website": "https://murf.ai",
+    "logo": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 6,
+    "name": "Tableau",
+    "description": "Data visualization platform that transforms complex data into interactive dashboards and insights.",
+    "category": "Data",
+    "tags": ["visualization", "analytics", "dashboards", "business-intelligence"],
+    "pricing": "Paid",
+    "features": ["Interactive dashboards", "Data connections", "Advanced analytics", "Collaboration tools", "Mobile support"],
+    "website": "https://tableau.com",
+    "logo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 7,
+    "name": "Copy.ai",
+    "description": "AI writing assistant that generates marketing copy, blog posts, and creative content for businesses.",
+    "category": "Writing",
+    "tags": ["copywriting", "marketing", "content", "blog"],
+    "pricing": "Freemium",
+    "features": ["Content templates", "Brand voice", "SEO optimization", "Multiple formats", "Team collaboration"],
+    "website": "https://copy.ai",
+    "logo": "https://images.unsplash.com/photo-1586281380349-632531db7ed4?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 8,
+    "name": "DALL-E 2",
+    "description": "OpenAI's image generation model that creates realistic images and art from natural language descriptions.",
+    "category": "Image",
+    "tags": ["image-generation", "creative", "art", "design"],
+    "pricing": "Paid",
+    "features": ["Text-to-image", "Image editing", "Variations", "Outpainting", "High resolution"],
+    "website": "https://openai.com/dall-e-2",
+    "logo": "https://images.unsplash.com/photo-1677442136019-21780ecad995?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 9,
+    "name": "Replit Ghostwriter",
+    "description": "AI coding assistant integrated into Replit that helps write, debug, and explain code in real-time.",
+    "category": "Code",
+    "tags": ["coding", "debugging", "explanation", "learning"],
+    "pricing": "Freemium",
+    "features": ["Code completion", "Bug detection", "Code explanation", "Refactoring", "Multi-language support"],
+    "website": "https://replit.com/ghostwriter",
+    "logo": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 10,
+    "name": "Synthesia",
+    "description": "AI video creation platform that generates professional videos with AI avatars from text scripts.",
+    "category": "Video",
+    "tags": ["video-creation", "avatars", "presentation", "training"],
+    "pricing": "Paid",
+    "features": ["AI avatars", "Text-to-video", "Multiple languages", "Custom avatars", "Professional templates"],
+    "website": "https://synthesia.io",
+    "logo": "https://images.unsplash.com/photo-1598300042247-d088f8ab3a91?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 11,
+    "name": "Descript",
+    "description": "All-in-one audio and video editor with AI-powered transcription, overdub, and editing capabilities.",
+    "category": "Audio",
+    "tags": ["audio-editing", "transcription", "podcasting", "overdub"],
+    "pricing": "Freemium",
+    "features": ["Text-based editing", "Voice cloning", "Transcription", "Screen recording", "Collaboration"],
+    "website": "https://descript.com",
+    "logo": "https://images.unsplash.com/photo-1598488035139-bdbb2231ce04?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 12,
+    "name": "MonkeyLearn",
+    "description": "No-code text analytics platform that uses AI to analyze and visualize customer feedback and data.",
+    "category": "Data",
+    "tags": ["text-analytics", "sentiment", "classification", "insights"],
+    "pricing": "Freemium",
+    "features": ["Sentiment analysis", "Text classification", "Data visualization", "API integration", "Custom models"],
+    "website": "https://monkeylearn.com",
+    "logo": "https://images.unsplash.com/photo-1620712943543-bcc4688e7485?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 13,
+    "name": "Jasper",
+    "description": "AI writing assistant for marketers and content creators to produce high-quality content at scale.",
+    "category": "Writing",
+    "tags": ["marketing", "content", "copywriting", "SEO"],
+    "pricing": "Paid",
+    "features": ["Long-form content", "Brand voice", "SEO optimization", "Templates", "Team collaboration"],
+    "website": "https://jasper.ai",
+    "logo": "https://images.unsplash.com/photo-1607706189992-eae578626c86?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 14,
+    "name": "Canva Magic Design",
+    "description": "AI-powered design tool that creates professional graphics, presentations, and visual content instantly.",
+    "category": "Image",
+    "tags": ["design", "graphics", "templates", "presentations"],
+    "pricing": "Freemium",
+    "features": ["AI design generation", "Template library", "Brand kit", "Collaboration", "Magic resize"],
+    "website": "https://canva.com",
+    "logo": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 15,
+    "name": "Tabnine",
+    "description": "AI code completion tool that predicts and suggests code as you type across multiple programming languages.",
+    "category": "Code",
+    "tags": ["code-completion", "productivity", "IDE", "development"],
+    "pricing": "Freemium",
+    "features": ["Code predictions", "IDE integration", "Team learning", "Code patterns", "Security scanning"],
+    "website": "https://tabnine.com",
+    "logo": "https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 16,
+    "name": "Pictory",
+    "description": "AI video creation tool that transforms long-form content into engaging short videos automatically.",
+    "category": "Video",
+    "tags": ["video-creation", "content-repurposing", "social-media", "automation"],
+    "pricing": "Paid",
+    "features": ["Text-to-video", "Auto-highlights", "Captions", "Stock footage", "Brand customization"],
+    "website": "https://pictory.ai",
+    "logo": "https://images.unsplash.com/photo-1611162617474-5b21e879e113?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 17,
+    "name": "Speechify",
+    "description": "Text-to-speech app that converts any text into natural-sounding audio with celebrity voices.",
+    "category": "Audio",
+    "tags": ["text-to-speech", "accessibility", "productivity", "reading"],
+    "pricing": "Freemium",
+    "features": ["Natural voices", "Speed control", "Highlighting", "Multiple formats", "Offline mode"],
+    "website": "https://speechify.com",
+    "logo": "https://images.unsplash.com/photo-1589903308904-1010c2294adc?w=64&h=64&fit=crop&crop=face"
+  },
+  {
+    "Id": 18,
+    "name": "DataRobot",
+    "description": "Enterprise AI platform that automates machine learning model development and deployment.",
+    "category": "Data",
+    "tags": ["machine-learning", "automation", "enterprise", "predictive-analytics"],
+    "pricing": "Enterprise",
+    "features": ["Automated ML", "Model deployment", "Bias detection", "Explainable AI", "MLOps"],
+    "website": "https://datarobot.com",
+    "logo": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=64&h=64&fit=crop&crop=face"
+  }
+]
