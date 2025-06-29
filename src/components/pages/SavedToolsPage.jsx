@@ -59,12 +59,12 @@ const SavedToolsPage = () => {
 
   const exportSavedTools = () => {
     const exportData = savedToolsData.map(tool => ({
-      name: tool.name,
+name: tool.Name,
       description: tool.description,
       category: tool.category,
       pricing: tool.pricing,
       website: tool.website,
-      tags: tool.tags
+      tags: Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',').map(tag => tag.trim()) || []
     }))
 
     const dataStr = JSON.stringify(exportData, null, 2)

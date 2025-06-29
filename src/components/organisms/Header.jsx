@@ -1,15 +1,18 @@
-import { useState } from 'react'
+import { useState, useContext } from 'react'
 import { Link, useLocation } from 'react-router-dom'
 import { motion, AnimatePresence } from 'framer-motion'
+import { useSelector } from 'react-redux'
 import ApperIcon from '@/components/ApperIcon'
 import Button from '@/components/atoms/Button'
 import SearchBar from '@/components/molecules/SearchBar'
 import { useSavedTools } from '@/hooks/useSavedTools'
-
+import { AuthContext } from '../../App'
 const Header = ({ onSearch, showSearch = true }) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const { count: savedCount } = useSavedTools()
   const location = useLocation()
+  const { logout } = useContext(AuthContext)
+  const { user } = useSelector((state) => state.user)
 
   const navigation = [
     { name: 'Browse', href: '/', icon: 'Compass' },
@@ -37,7 +40,7 @@ const Header = ({ onSearch, showSearch = true }) => {
             </span>
           </Link>
 
-          {/* Desktop Navigation */}
+{/* Desktop Navigation */}
           <nav className="hidden md:flex items-center space-x-1">
             {navigation.map((item) => (
               <Link
@@ -60,6 +63,18 @@ const Header = ({ onSearch, showSearch = true }) => {
                 )}
               </Link>
             ))}
+            
+            {/* User Menu */}
+            {user && (
+              <Button
+                variant="ghost"
+                onClick={logout}
+                className="ml-4"
+              >
+                <ApperIcon name="LogOut" className="h-4 w-4 mr-2" />
+                Logout
+              </Button>
+            )}
           </nav>
 
           {/* Mobile menu button */}
@@ -88,7 +103,7 @@ const Header = ({ onSearch, showSearch = true }) => {
             exit={{ opacity: 0, height: 0 }}
             className="md:hidden bg-surface/95 backdrop-blur-md border-t border-white/10"
           >
-            <div className="px-4 py-2 space-y-1">
+<div className="px-4 py-2 space-y-1">
               {navigation.map((item) => (
                 <Link
                   key={item.name}
@@ -111,6 +126,17 @@ const Header = ({ onSearch, showSearch = true }) => {
                   )}
                 </Link>
               ))}
+              
+              {/* Mobile Logout */}
+              {user && (
+                <button
+                  onClick={logout}
+                  className="flex items-center w-full px-4 py-3 rounded-lg text-sm font-medium text-gray-300 hover:text-white hover:bg-white/10 transition-all duration-200"
+                >
+                  <ApperIcon name="LogOut" className="h-5 w-5 mr-3" />
+                  Logout
+                </button>
+              )}
             </div>
           </motion.div>
         )}

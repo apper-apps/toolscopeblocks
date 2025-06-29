@@ -1,93 +1,279 @@
-import toolsData from '@/services/mockData/tools.json'
-
 // Simulate network delay
 const delay = (ms) => new Promise(resolve => setTimeout(resolve, ms));
 
 class ToolService {
   constructor() {
-    this.tools = [...toolsData];
+    this.apperClient = null;
+    this.initializeClient();
+  }
+
+  initializeClient() {
+    if (typeof window !== 'undefined' && window.ApperSDK) {
+      const { ApperClient } = window.ApperSDK;
+      this.apperClient = new ApperClient({
+        apperProjectId: import.meta.env.VITE_APPER_PROJECT_ID,
+        apperPublicKey: import.meta.env.VITE_APPER_PUBLIC_KEY
+      });
+    }
   }
 
   async getAll() {
-    await delay(300);
-    return [...this.tools];
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "description" } },
+          { field: { Name: "category" } },
+          { field: { Name: "pricing" } },
+          { field: { Name: "features" } },
+          { field: { Name: "website" } },
+          { field: { Name: "logo" } }
+        ],
+        orderBy: [{ fieldName: "Name", sorttype: "ASC" }]
+      };
+
+      const response = await this.apperClient.fetchRecords('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      console.error('Error fetching tools:', error);
+      throw error;
+    }
   }
 
   async getById(id) {
-    await delay(200);
-    const tool = this.tools.find(tool => tool.Id === parseInt(id));
-    if (!tool) {
-      throw new Error('Tool not found');
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "description" } },
+          { field: { Name: "category" } },
+          { field: { Name: "pricing" } },
+          { field: { Name: "features" } },
+          { field: { Name: "website" } },
+          { field: { Name: "logo" } }
+        ]
+      };
+
+      const response = await this.apperClient.getRecordById('tool', parseInt(id), params);
+      
+      if (!response.success) {
+        throw new Error(response.message || 'Tool not found');
+      }
+
+      return response.data;
+    } catch (error) {
+      console.error(`Error fetching tool ${id}:`, error);
+      throw error;
     }
-    return { ...tool };
   }
 
   async getByCategory(category) {
-    await delay(250);
-    return this.tools.filter(tool => tool.category === category).map(tool => ({ ...tool }));
-  }
-
-  async search(query) {
-    await delay(200);
-    const lowercaseQuery = query.toLowerCase();
-    return this.tools.filter(tool => 
-      tool.name.toLowerCase().includes(lowercaseQuery) ||
-      tool.description.toLowerCase().includes(lowercaseQuery) ||
-      tool.tags.some(tag => tag.toLowerCase().includes(lowercaseQuery))
-    ).map(tool => ({ ...tool }));
-  }
-
-  async filterByTags(tags) {
-    await delay(200);
-    if (!tags || tags.length === 0) return [...this.tools];
+    if (!this.apperClient) this.initializeClient();
     
-    return this.tools.filter(tool =>
-      tags.some(tag => tool.tags.includes(tag))
-    ).map(tool => ({ ...tool }));
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "description" } },
+          { field: { Name: "category" } },
+          { field: { Name: "pricing" } },
+          { field: { Name: "features" } },
+          { field: { Name: "website" } },
+          { field: { Name: "logo" } }
+        ],
+        where: [
+          {
+            FieldName: "category",
+            Operator: "EqualTo",
+            Values: [category]
+          }
+        ]
+      };
+
+      const response = await this.apperClient.fetchRecords('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      console.error('Error fetching tools by category:', error);
+      throw error;
+    }
   }
 
   async create(toolData) {
-    await delay(300);
-    const newId = Math.max(...this.tools.map(t => t.Id)) + 1;
-    const newTool = {
-      Id: newId,
-      ...toolData
-    };
-    this.tools.push(newTool);
-    return { ...newTool };
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      // Only include updateable fields
+      const updateableData = {
+        Name: toolData.name,
+        Tags: Array.isArray(toolData.tags) ? toolData.tags.join(',') : toolData.tags,
+        description: toolData.description,
+        category: toolData.category,
+        pricing: toolData.pricing,
+        features: Array.isArray(toolData.features) ? toolData.features.join('\n') : toolData.features,
+        website: toolData.website,
+        logo: toolData.logo
+      };
+
+      const params = {
+        records: [updateableData]
+      };
+
+      const response = await this.apperClient.createRecord('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to create ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          throw new Error(failedRecords[0].message || 'Failed to create tool');
+        }
+        
+        return successfulRecords[0]?.data;
+      }
+    } catch (error) {
+      console.error('Error creating tool:', error);
+      throw error;
+    }
   }
 
   async update(id, toolData) {
-    await delay(250);
-    const index = this.tools.findIndex(tool => tool.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error('Tool not found');
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      // Only include updateable fields
+      const updateableData = {
+        Id: parseInt(id),
+        Name: toolData.name,
+        Tags: Array.isArray(toolData.tags) ? toolData.tags.join(',') : toolData.tags,
+        description: toolData.description,
+        category: toolData.category,
+        pricing: toolData.pricing,
+        features: Array.isArray(toolData.features) ? toolData.features.join('\n') : toolData.features,
+        website: toolData.website,
+        logo: toolData.logo
+      };
+
+      const params = {
+        records: [updateableData]
+      };
+
+      const response = await this.apperClient.updateRecord('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      if (response.results) {
+        const successfulRecords = response.results.filter(result => result.success);
+        const failedRecords = response.results.filter(result => !result.success);
+        
+        if (failedRecords.length > 0) {
+          console.error(`Failed to update ${failedRecords.length} records:${JSON.stringify(failedRecords)}`);
+          throw new Error(failedRecords[0].message || 'Failed to update tool');
+        }
+        
+        return successfulRecords[0]?.data;
+      }
+    } catch (error) {
+      console.error('Error updating tool:', error);
+      throw error;
     }
-    this.tools[index] = { ...this.tools[index], ...toolData };
-    return { ...this.tools[index] };
   }
 
   async delete(id) {
-    await delay(200);
-    const index = this.tools.findIndex(tool => tool.Id === parseInt(id));
-    if (index === -1) {
-      throw new Error('Tool not found');
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      const params = {
+        RecordIds: [parseInt(id)]
+      };
+
+      const response = await this.apperClient.deleteRecord('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      return true;
+    } catch (error) {
+      console.error('Error deleting tool:', error);
+      throw error;
     }
-    this.tools.splice(index, 1);
-    return true;
   }
 
-  // Get all unique tags
   async getAllTags() {
-    await delay(150);
-    const allTags = this.tools.flatMap(tool => tool.tags);
-    return [...new Set(allTags)].sort();
+    try {
+      const tools = await this.getAll();
+      const allTags = tools.flatMap(tool => {
+        if (tool.Tags) {
+          return Array.isArray(tool.Tags) ? tool.Tags : tool.Tags.split(',').map(tag => tag.trim());
+        }
+        return [];
+      });
+      return [...new Set(allTags)].sort();
+    } catch (error) {
+      console.error('Error fetching tags:', error);
+      throw error;
+    }
   }
 
-  // Get tools by pricing tier
   async getByPricing(pricing) {
-    await delay(200);
-    return this.tools.filter(tool => tool.pricing === pricing).map(tool => ({ ...tool }));
+    if (!this.apperClient) this.initializeClient();
+    
+    try {
+      const params = {
+        fields: [
+          { field: { Name: "Name" } },
+          { field: { Name: "Tags" } },
+          { field: { Name: "description" } },
+          { field: { Name: "category" } },
+          { field: { Name: "pricing" } },
+          { field: { Name: "features" } },
+          { field: { Name: "website" } },
+          { field: { Name: "logo" } }
+        ],
+        where: [
+          {
+            FieldName: "pricing",
+            Operator: "EqualTo",
+            Values: [pricing]
+          }
+        ]
+      };
+
+      const response = await this.apperClient.fetchRecords('tool', params);
+      
+      if (!response.success) {
+        throw new Error(response.message);
+      }
+
+      return response.data || [];
+    } catch (error) {
+      console.error('Error fetching tools by pricing:', error);
+      throw error;
+    }
   }
 }
 

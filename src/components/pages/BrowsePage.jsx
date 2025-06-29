@@ -66,12 +66,15 @@ const BrowsePage = () => {
 
     // Apply search
     if (searchQuery) {
-      const query = searchQuery.toLowerCase()
-      filtered = filtered.filter(tool =>
-        tool.name.toLowerCase().includes(query) ||
-        tool.description.toLowerCase().includes(query) ||
-        tool.tags.some(tag => tag.toLowerCase().includes(query))
-      )
+const query = searchQuery.toLowerCase()
+      filtered = filtered.filter(tool => {
+        const tags = Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',').map(tag => tag.trim()) || []
+        return (
+          tool.Name?.toLowerCase().includes(query) ||
+          tool.description?.toLowerCase().includes(query) ||
+          tags.some(tag => tag.toLowerCase().includes(query))
+        )
+      })
     }
 
     // Apply category filter
@@ -92,12 +95,12 @@ const BrowsePage = () => {
     }
 
     // Apply sorting
-    filtered.sort((a, b) => {
+filtered.sort((a, b) => {
       switch (sortBy) {
         case 'name':
-          return a.name.localeCompare(b.name)
+          return (a.Name || '').localeCompare(b.Name || '')
         case 'category':
-          return a.category.localeCompare(b.category)
+          return (a.category || '').localeCompare(b.category || '')
         case 'pricing':
           const pricingOrder = { Free: 0, Freemium: 1, Paid: 2, Enterprise: 3 }
           return (pricingOrder[a.pricing] || 999) - (pricingOrder[b.pricing] || 999)

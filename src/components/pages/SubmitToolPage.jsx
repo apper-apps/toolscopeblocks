@@ -105,7 +105,7 @@ const SubmitToolPage = () => {
         .map(feature => feature.trim())
         .filter(feature => feature.length > 0)
 
-      const toolData = {
+const toolData = {
         name: formData.name.trim(),
         description: formData.description.trim(),
         category: formData.category,

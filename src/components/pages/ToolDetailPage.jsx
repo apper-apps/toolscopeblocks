@@ -1,16 +1,16 @@
-import { useState, useEffect } from 'react'
-import { useParams, Link } from 'react-router-dom'
-import { motion } from 'framer-motion'
-import { toast } from 'react-toastify'
-import ApperIcon from '@/components/ApperIcon'
-import Button from '@/components/atoms/Button'
-import Badge from '@/components/atoms/Badge'
-import Card from '@/components/atoms/Card'
-import Loading from '@/components/ui/Loading'
-import Error from '@/components/ui/Error'
-import { formatPricing, formatCategory } from '@/utils/formatting'
-import { useSavedTools } from '@/hooks/useSavedTools'
-import toolService from '@/services/api/toolService'
+import React, { useEffect, useState } from "react";
+import { Link, useParams } from "react-router-dom";
+import { motion } from "framer-motion";
+import { toast } from "react-toastify";
+import { useSavedTools } from "@/hooks/useSavedTools";
+import { formatCategory, formatPricing } from "@/utils/formatting";
+import ApperIcon from "@/components/ApperIcon";
+import Badge from "@/components/atoms/Badge";
+import Card from "@/components/atoms/Card";
+import Button from "@/components/atoms/Button";
+import Error from "@/components/ui/Error";
+import Loading from "@/components/ui/Loading";
+import toolService from "@/services/api/toolService";
 
 const ToolDetailPage = () => {
   const { id } = useParams()
@@ -43,7 +43,7 @@ const ToolDetailPage = () => {
     }
   }
 
-  const loadRelatedTools = async () => {
+const loadRelatedTools = async () => {
     try {
       const categoryTools = await toolService.getByCategory(tool.category)
       const filtered = categoryTools.filter(t => t.Id !== tool.Id).slice(0, 3)
@@ -53,12 +53,12 @@ const ToolDetailPage = () => {
     }
   }
 
-  const handleSaveToggle = () => {
+const handleSaveToggle = () => {
     const wasSaved = toggleTool(tool.Id.toString())
     if (wasSaved) {
-      toast.success(`${tool.name} saved to your collection!`)
+      toast.success(`${tool.Name} saved to your collection!`)
     } else {
-      toast.info(`${tool.name} removed from saved tools`)
+      toast.info(`${tool.Name} removed from saved tools`)
     }
   }
 
@@ -160,8 +160,8 @@ const ToolDetailPage = () => {
                       {pricing.text}
                     </Badge>
                   </div>
-                  <h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
-                    {tool.name}
+<h1 className="text-3xl sm:text-4xl font-bold text-white mb-2">
+                    {tool.Name}
                   </h1>
                 </div>
               </div>
@@ -175,7 +175,7 @@ const ToolDetailPage = () => {
             transition={{ delay: 0.1 }}
           >
             <Card className="p-8">
-              <h2 className="text-2xl font-semibold text-white mb-4">About {tool.name}</h2>
+<h2 className="text-2xl font-semibold text-white mb-4">About {tool.Name}</h2>
               <p className="text-gray-300 text-lg leading-relaxed">
                 {tool.description}
               </p>
@@ -190,8 +190,8 @@ const ToolDetailPage = () => {
           >
             <Card className="p-8">
               <h2 className="text-2xl font-semibold text-white mb-6">Key Features</h2>
-              <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                {tool.features.map((feature, index) => (
+<div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                {(Array.isArray(tool.features) ? tool.features : tool.features?.split('\n') || []).map((feature, index) => (
                   <motion.div
                     key={index}
                     initial={{ opacity: 0, x: -20 }}
@@ -217,8 +217,8 @@ const ToolDetailPage = () => {
           >
             <Card className="p-8">
               <h2 className="text-2xl font-semibold text-white mb-6">Tags</h2>
-              <div className="flex flex-wrap gap-3">
-                {tool.tags.map((tag) => (
+<div className="flex flex-wrap gap-3">
+                {(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',').map(tag => tag.trim()) || []).map((tag) => (
                   <Badge
                     key={tag}
                     className="bg-white/10 text-gray-300 hover:bg-white/20 transition-colors cursor-pointer text-base px-4 py-2"
@@ -285,13 +285,13 @@ const ToolDetailPage = () => {
                     {pricing.text}
                   </Badge>
                 </div>
-                <div className="flex items-center justify-between">
+<div className="flex items-center justify-between">
                   <span className="text-gray-400">Features</span>
-                  <span className="text-white">{tool.features.length}</span>
+                  <span className="text-white">{(Array.isArray(tool.features) ? tool.features : tool.features?.split('\n') || []).length}</span>
                 </div>
                 <div className="flex items-center justify-between">
                   <span className="text-gray-400">Tags</span>
-                  <span className="text-white">{tool.tags.length}</span>
+                  <span className="text-white">{(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',') || []).length}</span>
                 </div>
               </div>
             </Card>
@@ -321,9 +321,10 @@ const ToolDetailPage = () => {
                           alt={`${relatedTool.name} logo`}
                           className="w-10 h-10 rounded-lg object-cover"
                         />
+/>
                         <div className="flex-1 min-w-0">
                           <h4 className="text-white font-medium truncate">
-                            {relatedTool.name}
+                            {relatedTool.Name}
                           </h4>
                           <p className="text-gray-400 text-sm truncate">
                             {relatedTool.description}

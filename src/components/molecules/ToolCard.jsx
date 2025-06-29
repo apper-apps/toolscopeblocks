@@ -18,11 +18,11 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
     e.preventDefault()
     e.stopPropagation()
     
-    const wasSaved = toggleTool(tool.Id.toString())
+const wasSaved = toggleTool(tool.Id.toString())
     if (wasSaved) {
-      toast.success(`${tool.name} saved to your collection!`)
+      toast.success(`${tool.Name} saved to your collection!`)
     } else {
-      toast.info(`${tool.name} removed from saved tools`)
+      toast.info(`${tool.Name} removed from saved tools`)
     }
   }
 
@@ -38,9 +38,9 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
         <Card className="p-6 hover:scale-[1.01]">
           <div className="flex items-center gap-6">
             <div className="flex-shrink-0">
-              <img 
+<img 
                 src={tool.logo} 
-                alt={`${tool.name} logo`}
+                alt={`${tool.Name} logo`}
                 className="w-16 h-16 rounded-lg object-cover"
               />
             </div>
@@ -48,7 +48,7 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
             <div className="flex-1 min-w-0">
               <div className="flex items-start justify-between mb-2">
                 <div>
-                  <h3 className="text-xl font-semibold text-white mb-1">{tool.name}</h3>
+<h3 className="text-xl font-semibold text-white mb-1">{tool.Name}</h3>
                   <div className="flex items-center gap-3">
                     <Badge className={`bg-gradient-to-r ${categoryGradient} text-white border-0`}>
                       {tool.category}
@@ -88,8 +88,8 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
                 {truncateText(tool.description, 200)}
               </p>
               
-              <div className="flex flex-wrap gap-2">
-                {tool.tags.slice(0, 4).map((tag) => (
+<div className="flex flex-wrap gap-2">
+                {(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',').map(tag => tag.trim()) || []).slice(0, 4).map((tag) => (
                   <span
                     key={tag}
                     className="px-2 py-1 bg-white/10 text-gray-300 text-xs rounded-md"
@@ -97,9 +97,9 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
                     {tag}
                   </span>
                 ))}
-                {tool.tags.length > 4 && (
+                {(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',') || []).length > 4 && (
                   <span className="px-2 py-1 bg-white/10 text-gray-400 text-xs rounded-md">
-                    +{tool.tags.length - 4} more
+                    +{(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',') || []).length - 4} more
                   </span>
                 )}
               </div>
@@ -114,9 +114,9 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
     <Link to={`/tool/${tool.Id}`} className={className}>
       <Card className="overflow-hidden h-full group">
         <div className="relative">
-          <img 
+<img 
             src={tool.logo} 
-            alt={`${tool.name} logo`}
+            alt={`${tool.Name} logo`}
             className="w-full h-48 object-cover group-hover:scale-105 transition-transform duration-300"
           />
           <div className="absolute top-4 right-4">
@@ -142,8 +142,8 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
         
         <div className="p-6">
           <div className="flex items-start justify-between mb-3">
-            <h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
-              {tool.name}
+<h3 className="text-lg font-semibold text-white group-hover:text-primary transition-colors">
+              {tool.Name}
             </h3>
             <Badge className={pricing.color}>
               {pricing.text}
@@ -154,8 +154,8 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
             {truncateText(tool.description, 120)}
           </p>
           
-          <div className="flex flex-wrap gap-1 mb-4">
-            {tool.tags.slice(0, 3).map((tag) => (
+<div className="flex flex-wrap gap-1 mb-4">
+            {(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',').map(tag => tag.trim()) || []).slice(0, 3).map((tag) => (
               <span
                 key={tag}
                 className="px-2 py-1 bg-white/10 text-gray-400 text-xs rounded-md"
@@ -163,9 +163,9 @@ const ToolCard = ({ tool, viewMode = 'grid', className = '' }) => {
                 {tag}
               </span>
             ))}
-            {tool.tags.length > 3 && (
+            {(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',') || []).length > 3 && (
               <span className="px-2 py-1 bg-white/10 text-gray-400 text-xs rounded-md">
-                +{tool.tags.length - 3}
+                +{(Array.isArray(tool.Tags) ? tool.Tags : tool.Tags?.split(',') || []).length - 3}
               </span>
             )}
           </div>

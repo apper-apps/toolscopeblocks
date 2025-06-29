@@ -29,7 +29,7 @@ const CategoryCard = ({ category, index }) => {
       animate={{ opacity: 1, y: 0 }}
       transition={{ delay: index * 0.1 }}
     >
-      <Link to={`/?categories=${encodeURIComponent(category.name)}`}>
+<Link to={`/?categories=${encodeURIComponent(category.Name)}`}>
         <Card className="group overflow-hidden h-full">
           <div className={`h-32 bg-gradient-to-br ${gradient} relative`}>
             <div className="absolute inset-0 bg-black/20" />
@@ -46,12 +46,12 @@ const CategoryCard = ({ category, index }) => {
           </div>
           
           <div className="p-6">
-            <h3 className="text-xl font-semibold text-white mb-3 group-hover:text-primary transition-colors">
-              {category.name}
+<h3 className="text-xl font-semibold text-white mb-3 group-hover:text-primary transition-colors">
+              {category.Name}
             </h3>
             
-            <p className="text-gray-300 text-sm mb-4">
-              {getCategoryDescription(category.name)}
+<p className="text-gray-300 text-sm mb-4">
+              {getCategoryDescription(category.Name)}
             </p>
             
             <div className="flex items-center text-primary text-sm font-medium">
